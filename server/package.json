@@ -1,0 +1,24 @@
+{
+  "name": "symptom-tracker-server",
+  "version": "1.0.0",
+  "description": "Backend for symptom tracking application",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env PORT=1234 node server.js",
+    "dev": "cross-env PORT=1234 nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.2.0",
+    "sequelize": "^6.31.0",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.22"
+  }
+} 
