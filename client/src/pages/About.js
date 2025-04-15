@@ -7,15 +7,23 @@ import {
   Paper,
   Avatar,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  Link,
+  IconButton,
+  Chip,
+  Divider
 } from '@mui/material';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import SchoolIcon from '@mui/icons-material/School';
+import CodeIcon from '@mui/icons-material/Code';
 import LandingNav from '../components/LandingNav';
 import Footer from '../components/Footer';
 
-const MissionCard = ({ icon, title, description }) => (
+const TeamMemberCard = ({ name, role, image, linkedin, github, skills }) => (
   <Paper
     elevation={3}
     sx={{
@@ -37,22 +45,38 @@ const MissionCard = ({ icon, title, description }) => (
     }}
   >
     <Avatar
+      src={image}
       sx={{
-        width: 80,
-        height: 80,
-        bgcolor: 'primary.main',
+        width: 120,
+        height: 120,
         mb: 2,
         boxShadow: '0 4px 8px rgba(96, 165, 250, 0.2)'
       }}
-    >
-      {icon}
-    </Avatar>
+    />
     <Typography variant="h5" component="h3" gutterBottom sx={{ color: 'primary.light' }}>
-      {title}
+      {name}
     </Typography>
-    <Typography variant="body1" color="text.secondary">
-      {description}
+    <Typography variant="body1" color="text.secondary" gutterBottom>
+      {role}
     </Typography>
+    <Box sx={{ mt: 2, mb: 2 }}>
+      {skills.map((skill, index) => (
+        <Chip
+          key={index}
+          label={skill}
+          size="small"
+          sx={{ m: 0.5, bgcolor: 'primary.dark', color: 'primary.light' }}
+        />
+      ))}
+    </Box>
+    <Box sx={{ mt: 'auto', pt: 2 }}>
+      <IconButton component={Link} href={linkedin} target="_blank" sx={{ color: 'primary.light' }}>
+        <LinkedInIcon />
+      </IconButton>
+      <IconButton component={Link} href={github} target="_blank" sx={{ color: 'primary.light' }}>
+        <GitHubIcon />
+      </IconButton>
+    </Box>
   </Paper>
 );
 
@@ -60,21 +84,38 @@ const About = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const missions = [
+  const teamMembers = [
     {
-      icon: <MedicalServicesIcon sx={{ fontSize: 40 }} />,
-      title: 'Empower Health Management',
-      description: 'We believe in giving individuals the tools they need to take control of their health journey through comprehensive symptom tracking and analysis.'
+      name: 'John Doe',
+      role: 'Frontend Developer',
+      image: 'https://i.pravatar.cc/150?img=1',
+      linkedin: 'https://linkedin.com/in/johndoe',
+      github: 'https://github.com/johndoe',
+      skills: ['React', 'Material-UI', 'JavaScript', 'TypeScript']
     },
     {
-      icon: <HealthAndSafetyIcon sx={{ fontSize: 40 }} />,
-      title: 'Promote Preventive Care',
-      description: 'Our platform encourages proactive health management by helping users identify patterns and trends in their symptoms before they become serious concerns.'
+      name: 'Jane Smith',
+      role: 'Backend Developer',
+      image: 'https://i.pravatar.cc/150?img=2',
+      linkedin: 'https://linkedin.com/in/janesmith',
+      github: 'https://github.com/janesmith',
+      skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs']
     },
     {
-      icon: <PsychologyIcon sx={{ fontSize: 40 }} />,
-      title: 'Enhance Doctor-Patient Communication',
-      description: 'We facilitate better healthcare experiences by enabling users to share accurate, detailed health data with their healthcare providers.'
+      name: 'Mike Johnson',
+      role: 'UI/UX Designer',
+      image: 'https://i.pravatar.cc/150?img=3',
+      linkedin: 'https://linkedin.com/in/mikejohnson',
+      github: 'https://github.com/mikejohnson',
+      skills: ['Figma', 'Adobe XD', 'UI Design', 'User Research']
+    },
+    {
+      name: 'Sarah Williams',
+      role: 'Project Manager',
+      image: 'https://i.pravatar.cc/150?img=4',
+      linkedin: 'https://linkedin.com/in/sarahwilliams',
+      github: 'https://github.com/sarahwilliams',
+      skills: ['Agile', 'Scrum', 'Project Planning', 'Team Leadership']
     }
   ];
 
@@ -115,16 +156,92 @@ const About = () => {
             align="center"
             sx={{ maxWidth: 800, mx: 'auto', opacity: 0.9 }}
           >
-            Empowering individuals to take control of their health through innovative tracking and analysis
+            A Semester Project by Computer Science Students
           </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <Chip
+              icon={<SchoolIcon />}
+              label="CS 401 - Software Engineering"
+              sx={{ bgcolor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}
+            />
+          </Box>
         </Container>
       </Box>
 
       <Container maxWidth="lg" sx={{ mb: 8 }}>
+        <Typography variant="h4" component="h2" align="center" gutterBottom sx={{ color: 'primary.light', mb: 4 }}>
+          Our Platform
+        </Typography>
+        <Grid container spacing={4} sx={{ mb: 8 }}>
+          <Grid item xs={12} md={4}>
+            <Paper
+              sx={{
+                p: 4,
+                height: '100%',
+                background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+                border: '1px solid rgba(96, 165, 250, 0.1)',
+              }}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+                <MedicalServicesIcon sx={{ fontSize: 48, color: 'primary.light' }} />
+              </Box>
+              <Typography variant="h6" gutterBottom sx={{ color: 'primary.light' }}>
+                Comprehensive Health Dashboard
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Access a unified view of your health data, including vital signs, lab results, and medical history. Track trends and receive personalized health recommendations.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper
+              sx={{
+                p: 4,
+                height: '100%',
+                background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+                border: '1px solid rgba(96, 165, 250, 0.1)',
+              }}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+                <PsychologyIcon sx={{ fontSize: 48, color: 'primary.light' }} />
+              </Box>
+              <Typography variant="h6" gutterBottom sx={{ color: 'primary.light' }}>
+                Smart Health Assistant
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Our intelligent system learns from your health patterns to provide proactive alerts, medication reminders, and lifestyle suggestions tailored to your needs.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper
+              sx={{
+                p: 4,
+                height: '100%',
+                background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+                border: '1px solid rgba(96, 165, 250, 0.1)',
+              }}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+                <HealthAndSafetyIcon sx={{ fontSize: 48, color: 'primary.light' }} />
+              </Box>
+              <Typography variant="h6" gutterBottom sx={{ color: 'primary.light' }}>
+                Secure & Private
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Your health data is encrypted and stored securely. We follow strict privacy guidelines to protect your information.
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Typography variant="h4" component="h2" align="center" gutterBottom sx={{ color: 'primary.light', mb: 4 }}>
+          Our Team
+        </Typography>
         <Grid container spacing={4}>
-          {missions.map((mission, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <MissionCard {...mission} />
+          {teamMembers.map((member, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <TeamMemberCard {...member} />
             </Grid>
           ))}
         </Grid>
@@ -156,25 +273,28 @@ const About = () => {
             gutterBottom
             sx={{ color: 'primary.light' }}
           >
-            Our Story
+            Our Project Journey
           </Typography>
           <Typography
             variant="body1"
             sx={{ mb: 4, opacity: 0.9 }}
           >
-            HealthNex was born from a simple observation: managing health symptoms can be overwhelming and disorganized. 
-            We created this platform to provide a comprehensive solution that makes health tracking simple, insightful, 
-            and actionable. Our team of healthcare professionals, developers, and designers work together to ensure 
-            that HealthNex remains at the forefront of health management technology.
+            HealthNex represents our semester-long journey in Software Engineering. As a team of four computer science 
+            students, we combined our diverse skills to create a comprehensive health tracking platform. This project 
+            challenged us to apply theoretical knowledge to practical problems, implement modern development practices, 
+            and work collaboratively in a professional setting.
           </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-            gutterBottom
-            sx={{ mt: 4, color: 'primary.light' }}
-          >
-            Join us in revolutionizing personal health management
-          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 4 }}>
+            <Chip
+              icon={<CodeIcon />}
+              label="View Project Repository"
+              component={Link}
+              href="https://github.com/your-org/healthnex"
+              target="_blank"
+              clickable
+              sx={{ bgcolor: 'primary.dark', color: 'primary.light' }}
+            />
+          </Box>
         </Container>
       </Box>
       <Footer />

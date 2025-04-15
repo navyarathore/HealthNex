@@ -12,6 +12,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProfileSetup from './pages/ProfileSetup';
 import Dashboard from './pages/Dashboard';
+import Features from './pages/Features';
+import About from './pages/About';
 
 const theme = createTheme({
   palette: {
@@ -205,6 +207,8 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/about" element={<About />} />
             <Route
               path="/profile-setup"
               element={

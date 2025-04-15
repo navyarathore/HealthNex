@@ -51,7 +51,21 @@ const FeatureCard = ({ icon, title, description }) => (
       }
     }}
   >
-    {icon}
+    <Box
+      sx={{
+        width: 64,
+        height: 64,
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mb: 2,
+        background: 'rgba(96, 165, 250, 0.1)',
+        border: '1px solid rgba(96, 165, 250, 0.2)',
+      }}
+    >
+      {icon}
+    </Box>
     <Typography variant="h6" sx={{ mt: 2, mb: 1, color: 'primary.light' }}>
       {title}
     </Typography>
@@ -62,32 +76,134 @@ const FeatureCard = ({ icon, title, description }) => (
 );
 
 const TestimonialCard = ({ name, role, content }) => (
-  <Card sx={{ height: '100%', background: 'rgba(255, 255, 255, 0.05)' }}>
+  <Card 
+    sx={{ 
+      height: '100%', 
+      background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+      border: '1px solid rgba(96, 165, 250, 0.1)',
+      transition: 'all 0.3s ease-in-out',
+      '&:hover': {
+        transform: 'translateY(-5px)',
+        boxShadow: '0 8px 16px rgba(96, 165, 250, 0.2)',
+        border: '1px solid rgba(96, 165, 250, 0.2)',
+      }
+    }}
+  >
     <CardContent>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-        <Avatar sx={{ bgcolor: 'primary.main', mr: 2 }}>{name[0]}</Avatar>
+        <Avatar 
+          sx={{ 
+            bgcolor: 'primary.main', 
+            mr: 2,
+            width: 56,
+            height: 56,
+            border: '2px solid rgba(96, 165, 250, 0.2)'
+          }}
+        >
+          {name[0]}
+        </Avatar>
         <Box>
-          <Typography variant="subtitle1" color="primary.light">{name}</Typography>
-          <Typography variant="body2" color="text.secondary">{role}</Typography>
+          <Typography variant="subtitle1" color="primary.light" sx={{ fontWeight: 600 }}>
+            {name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {role}
+          </Typography>
         </Box>
       </Box>
-      <Typography variant="body1" color="text.secondary">{content}</Typography>
+      <Typography 
+        variant="body1" 
+        color="text.secondary"
+        sx={{
+          position: 'relative',
+          pl: 2,
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 4,
+            background: 'linear-gradient(to bottom, #60A5FA, #3B82F6)',
+            borderRadius: 2
+          }
+        }}
+      >
+        {content}
+      </Typography>
     </CardContent>
   </Card>
 );
 
-const InnovationCard = ({ icon, title, description }) => (
-  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
-    <CardContent sx={{ flexGrow: 1 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+const InnovationCard = ({ icon, title, description, features }) => (
+  <Card 
+    sx={{ 
+      height: '100%', 
+      display: 'flex', 
+      flexDirection: 'column',
+      background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+      border: '1px solid rgba(96, 165, 250, 0.1)',
+      transition: 'all 0.3s ease-in-out',
+      '&:hover': {
+        transform: 'translateY(-5px)',
+        boxShadow: '0 8px 16px rgba(96, 165, 250, 0.2)',
+        border: '1px solid rgba(96, 165, 250, 0.2)',
+      }
+    }}
+  >
+    <CardContent sx={{ flexGrow: 1, p: 3 }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          mb: 3,
+          '& svg': {
+            fontSize: 48,
+            color: 'primary.main'
+          }
+        }}
+      >
         {icon}
       </Box>
-      <Typography variant="h5" component="h3" gutterBottom align="center">
+      <Typography 
+        variant="h5" 
+        component="h3" 
+        gutterBottom 
+        align="center"
+        sx={{ 
+          color: 'primary.light',
+          fontWeight: 600,
+          mb: 2
+        }}
+      >
         {title}
       </Typography>
-      <Typography variant="body1" color="text.secondary" align="center">
+      <Typography 
+        variant="body1" 
+        color="text.secondary" 
+        align="center"
+        sx={{ lineHeight: 1.7, mb: 3 }}
+      >
         {description}
       </Typography>
+      <List dense>
+        {features.map((feature, index) => (
+          <ListItem key={index} sx={{ py: 0.5 }}>
+            <ListItemIcon sx={{ minWidth: 36 }}>
+              <CheckCircleIcon color="primary" fontSize="small" />
+            </ListItemIcon>
+            <ListItemText 
+              primary={feature} 
+              sx={{ 
+                '& .MuiListItemText-primary': {
+                  color: 'text.secondary',
+                  fontSize: '0.9rem'
+                }
+              }}
+            />
+          </ListItem>
+        ))}
+      </List>
     </CardContent>
   </Card>
 );
@@ -124,17 +240,35 @@ const LandingPage = () => {
     {
       icon: <PsychologyIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
       title: 'AI-Powered Symptom Analysis',
-      description: 'Leveraging advanced AI to analyze symptom patterns over time, providing more precise and accurate diagnoses instead of broad symptom matching.'
+      description: 'Our advanced AI system analyzes symptom patterns with unprecedented accuracy, providing personalized health insights and early detection capabilities.',
+      features: [
+        'Real-time symptom pattern recognition',
+        'Predictive health analytics',
+        'Personalized health recommendations',
+        'Continuous learning and improvement'
+      ]
     },
     {
       icon: <InsightsIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
-      title: 'Personalized Health Insights',
-      description: 'Based on your diagnosis, receive tailored health insights and recommendations for lifestyle changes, including dietary adjustments and wellness practices.'
+      title: 'Smart Health Monitoring',
+      description: 'Comprehensive health tracking system that monitors vital signs, activity levels, and wellness metrics to provide actionable insights.',
+      features: [
+        '24/7 health monitoring',
+        'Smart alerts and notifications',
+        'Trend analysis and reporting',
+        'Integration with wearables'
+      ]
     },
     {
       icon: <SecurityIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
       title: 'Advanced Data Security',
-      description: 'Your medical information is protected with state-of-the-art encryption and security measures against various cyber threats, ensuring complete privacy.'
+      description: 'Enterprise-grade security measures protecting your sensitive health data with state-of-the-art encryption and privacy controls.',
+      features: [
+        'End-to-end encryption',
+        'HIPAA compliance',
+        'Multi-factor authentication',
+        'Regular security audits'
+      ]
     }
   ];
 
@@ -202,20 +336,6 @@ const LandingPage = () => {
                 </Typography>
                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 4 }}>
                   <Button
-                    variant="contained"
-                    color="secondary"
-                    size="large"
-                    onClick={() => navigate('/register')}
-                    sx={{
-                      boxShadow: '0 4px 14px rgba(244, 143, 177, 0.3)',
-                      '&:hover': {
-                        boxShadow: '0 6px 20px rgba(244, 143, 177, 0.4)'
-                      }
-                    }}
-                  >
-                    Get Started Free
-                  </Button>
-                  <Button
                     variant="outlined"
                     color="inherit"
                     size="large"
@@ -228,7 +348,7 @@ const LandingPage = () => {
                       }
                     }}
                   >
-                    Sign In
+                    Start Tracking!
                   </Button>
                 </Stack>
               </Grid>
@@ -307,16 +427,45 @@ const LandingPage = () => {
         </Box>
 
         {/* Features Section */}
-        <Box sx={{ py: 8 }}>
+        <Box sx={{ py: 8, background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}>
           <Container maxWidth="lg">
-            <Typography
-              variant="h3"
-              component="h2"
-              align="center"
-              sx={{ mb: 6, fontWeight: 700 }}
-            >
-              Features
-            </Typography>
+            <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Typography
+                variant="h3"
+                component="h2"
+                sx={{ 
+                  fontWeight: 800,
+                  color: 'primary.light',
+                  position: 'relative',
+                  display: 'inline-block',
+                  mb: 2,
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: -8,
+                    left: -8,
+                    right: -8,
+                    bottom: -8,
+                    background: 'rgba(96, 165, 250, 0.1)',
+                    borderRadius: '50%',
+                    zIndex: -1
+                  }
+                }}
+              >
+                Features
+              </Typography>
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                sx={{ 
+                  maxWidth: '600px',
+                  mx: 'auto',
+                  lineHeight: 1.6
+                }}
+              >
+                Discover the powerful features that make HealthNex your ultimate health companion
+              </Typography>
+            </Box>
             <Grid container spacing={4}>
               {features.map((feature, index) => (
                 <Grid item xs={12} sm={6} md={3} key={index}>
@@ -328,17 +477,48 @@ const LandingPage = () => {
         </Box>
 
         {/* Innovations Section */}
-        <Box sx={{ py: 8, bgcolor: 'background.paper' }}>
+        <Box sx={{ py: 8, background: 'linear-gradient(180deg, #1E293B 0%, #0F172A 100%)' }}>
           <Container maxWidth="lg">
-            <Typography variant="h3" component="h2" align="center" gutterBottom>
-              Our Innovations
-            </Typography>
-            <Typography variant="h6" color="text.secondary" align="center" sx={{ mb: 6 }}>
-              Revolutionizing healthcare through technology
-            </Typography>
-            <Grid container spacing={4}>
+            <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Typography 
+                variant="h3" 
+                component="h2"
+                sx={{ 
+                  fontWeight: 800,
+                  color: 'primary.light',
+                  position: 'relative',
+                  display: 'inline-block',
+                  mb: 2,
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: -8,
+                    left: -8,
+                    right: -8,
+                    bottom: -8,
+                    background: 'rgba(96, 165, 250, 0.1)',
+                    borderRadius: '50%',
+                    zIndex: -1
+                  }
+                }}
+              >
+                Our Innovations
+              </Typography>
+              <Typography 
+                variant="h6" 
+                color="text.secondary"
+                sx={{ 
+                  maxWidth: '600px',
+                  mx: 'auto',
+                  lineHeight: 1.6
+                }}
+              >
+                Revolutionizing healthcare through cutting-edge technology and AI
+              </Typography>
+            </Box>
+            <Grid container spacing={4} justifyContent="center">
               {innovations.map((innovation, index) => (
-                <Grid item xs={12} md={4} key={index}>
+                <Grid item xs={12} sm={6} md={4} key={index}>
                   <InnovationCard {...innovation} />
                 </Grid>
               ))}
@@ -347,16 +527,45 @@ const LandingPage = () => {
         </Box>
 
         {/* Testimonials Section */}
-        <Box sx={{ py: 8, bgcolor: 'background.paper' }}>
+        <Box sx={{ py: 8, background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}>
           <Container maxWidth="lg">
-            <Typography
-              variant="h3"
-              component="h2"
-              align="center"
-              sx={{ mb: 6, fontWeight: 700 }}
-            >
-              What Our Users Say
-            </Typography>
+            <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Typography
+                variant="h3"
+                component="h2"
+                sx={{ 
+                  fontWeight: 800,
+                  color: 'primary.light',
+                  position: 'relative',
+                  display: 'inline-block',
+                  mb: 2,
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: -8,
+                    left: -8,
+                    right: -8,
+                    bottom: -8,
+                    background: 'rgba(96, 165, 250, 0.1)',
+                    borderRadius: '50%',
+                    zIndex: -1
+                  }
+                }}
+              >
+                What Our Users Say
+              </Typography>
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                sx={{ 
+                  maxWidth: '600px',
+                  mx: 'auto',
+                  lineHeight: 1.6
+                }}
+              >
+                Hear from our community of health-conscious individuals and professionals
+              </Typography>
+            </Box>
             <Grid container spacing={4}>
               {testimonials.map((testimonial, index) => (
                 <Grid item xs={12} md={4} key={index}>
