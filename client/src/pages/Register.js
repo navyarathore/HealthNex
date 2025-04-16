@@ -22,10 +22,10 @@ const Register = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { register } = useAuth();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    name: 'Test User',
+    email: 'test@example.com',
+    password: 'password123',
+    confirmPassword: 'password123'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // For testing purposes - just navigate directly to dashboard
+    navigate('/dashboard');
+    
+    /* Original authentication code commented out for testing
     setError('');
 
     if (formData.password !== formData.confirmPassword) {
@@ -59,6 +64,7 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
+    */
   };
 
   return (
@@ -126,8 +132,11 @@ const Register = () => {
                 fontWeight: 500
               }}
             >
-              Create Account
+              Create Account (Testing Mode)
             </Typography>
+            <Alert severity="info" sx={{ mb: 2 }}>
+              Authentication disabled for testing. Click Sign Up to proceed.
+            </Alert>
             {error && (
               <Alert severity="error" sx={{ mb: 2 }}>
                 {error}
@@ -273,7 +282,7 @@ const Register = () => {
                   }
                 }}
               >
-                {loading ? 'Creating Account...' : 'Sign Up'}
+                {loading ? 'Creating Account...' : 'Sign Up (Test Mode)'}
               </Button>
               <Box sx={{ textAlign: 'center' }}>
                 <Link
@@ -299,4 +308,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+// import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
@@ -10,11 +10,18 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState({ uid: 'test-user-123', email: 'test@example.com' }); // Mock user
+  const [userProfile, setUserProfile] = useState({
+    firstName: 'Test',
+    lastName: 'User',
+    email: 'test@example.com',
+    createdAt: new Date().toISOString()
+  }); // Mock profile
+  const [loading, setLoading] = useState(false); // Set to false to skip loading state
 
+  // Commented out for testing
   async function signup(email, password) {
+    /* 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -29,9 +36,16 @@ export function AuthProvider({ children }) {
     } catch (error) {
       throw new Error(error.message);
     }
+    */
+    
+    // Mock implementation
+    console.log('Mock signup with:', email, password);
+    return { uid: 'test-user-123', email };
   }
 
+  // Commented out for testing
   async function login(email, password) {
+    /*
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       return userCredential.user;
@@ -55,17 +69,31 @@ export function AuthProvider({ children }) {
       }
       throw new Error(errorMessage);
     }
+    */
+    
+    // Mock implementation
+    console.log('Mock login with:', email, password);
+    return { uid: 'test-user-123', email };
   }
 
+  // Commented out for testing
   async function logout() {
+    /*
     try {
       await signOut(auth);
     } catch (error) {
       throw new Error(error.message);
     }
+    */
+    
+    // Mock implementation
+    console.log('Mock logout');
+    return true;
   }
 
+  // Modified for testing
   async function updateProfile(profileData) {
+    /* 
     try {
       if (!currentUser) throw new Error('No user is currently signed in.');
       const userRef = doc(db, 'users', currentUser.uid);
@@ -73,9 +101,17 @@ export function AuthProvider({ children }) {
     } catch (error) {
       throw new Error(error.message);
     }
+    */
+    
+    // Mock implementation
+    console.log('Mock update profile with:', profileData);
+    setUserProfile({ ...userProfile, ...profileData });
+    return true;
   }
 
+  // Modified for testing
   async function getProfile() {
+    /*
     try {
       if (!currentUser) throw new Error('No user is currently signed in.');
       const userRef = doc(db, 'users', currentUser.uid);
@@ -84,9 +120,15 @@ export function AuthProvider({ children }) {
     } catch (error) {
       throw new Error(error.message);
     }
+    */
+    
+    // Mock implementation
+    return userProfile;
   }
 
+  // Commented out auth state listener
   useEffect(() => {
+    /*
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
       if (user) {
@@ -105,6 +147,10 @@ export function AuthProvider({ children }) {
     });
 
     return unsubscribe;
+    */
+    
+    // Mock implementation - no cleanup needed
+    return () => {}; 
   }, []);
 
   const value = {
@@ -119,7 +165,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
-} 
+}

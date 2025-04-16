@@ -15,6 +15,7 @@ import {
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Layout from './Layout';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { useAuth } from '../contexts/AuthContext'; // Import useAuth hook
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -26,9 +27,11 @@ const Register = () => {
   });
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add loading state
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { signup, updateProfile } = useAuth(); // Get auth methods from context
 
   const validateForm = () => {
     const newErrors = {};
@@ -69,12 +72,29 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setIsSubmitting(true);
+      setSubmitError('');
+      
       try {
-        // TODO: Implement actual registration API call
-        console.log('Registration data:', formData);
+        // Register the user with Firebase
+        const user = await signup(formData.email, formData.password);
+        
+        // After successful registration, update the user profile with name
+        await updateProfile({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          fullName: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          createdAt: new Date().toISOString(),
+        });
+        
+        // Redirect to login page
         navigate('/login');
       } catch (error) {
-        setSubmitError('Registration failed. Please try again.');
+        console.error('Registration error:', error);
+        setSubmitError(error.message || 'Registration failed. Please try again.');
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -206,8 +226,9 @@ const Register = () => {
                 variant="contained"
                 size="large"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={isSubmitting} // Disable button when submitting
               >
-                Register
+                {isSubmitting ? 'Registering...' : 'Register'}
               </Button>
 
               <Box sx={{ textAlign: 'center' }}>
@@ -226,4 +247,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;

@@ -9,11 +9,13 @@ import PageNotFound from './components/PageNotFound';
 import { AuthProvider } from './contexts/AuthContext';
 import { useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Register from './pages/Register';
 import ProfileSetup from './pages/ProfileSetup';
 import Dashboard from './pages/Dashboard';
 import Features from './pages/Features';
 import About from './pages/About';
+import Contact from './pages/Contact';
+import OfflineIndicator from './components/OfflineIndicator';
 
 const theme = createTheme({
   palette: {
@@ -203,12 +205,14 @@ function App() {
       <CssBaseline />
       <AuthProvider>
         <Router>
+          <OfflineIndicator />
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/features" element={<Features />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route
               path="/profile-setup"
               element={
@@ -257,4 +261,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
