@@ -6,13 +6,13 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 // const firebaseConfig = {
-//   apiKey: ,
-//   authDomain: ,
-//   projectId: ,
-//   storageBucket: ,
-//   messagingSenderId: ,
-//   appId: ,
-//   measurementId: 
+//   apiKey: "AIzaSyB6oGDstvoKfAgNxDfrbewyTDAvaJoMz5k",
+//   authDomain: "healthnex-46b79.firebaseapp.com",
+//   projectId: "healthnex-46b79",
+//   storageBucket: "healthnex-46b79.firebasestorage.app",
+//   messagingSenderId: "157682430022",
+//   appId: "1:157682430022:web:0f56ae19b55fe512605a47",
+//   measurementId: "G-91VRP36TKV"
 // };
 
 // Initialize Firebase
