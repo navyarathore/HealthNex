@@ -7,18 +7,15 @@ const DashboardHeader = () => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-      <IconButton 
-        onClick={() => navigate('/')}
-        sx={{ mr: 2 }}
-      >
+    <Box sx={{ display: 'flex', alignItems: 'center', py: 1 }}>
+      <IconButton onClick={() => navigate('/')} size="small">
         <ArrowBackIcon />
       </IconButton>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: 700 }}>
+      <Typography variant="h5" component="h1" sx={{ ml: 1 }}>
         Dashboard
       </Typography>
     </Box>
   );
 };
 
-export default DashboardHeader; 
+export default DashboardHeader;

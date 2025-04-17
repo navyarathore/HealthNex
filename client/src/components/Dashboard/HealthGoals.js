@@ -1,116 +1,66 @@
 import React from 'react';
-import { Paper, Typography, Box, LinearProgress, Chip } from '@mui/material';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
-import HotelIcon from '@mui/icons-material/Hotel';
+import { Paper, Typography, Box, Checkbox, List, ListItem, ListItemText } from '@mui/material';
 
 const HealthGoals = () => {
   const goals = [
     {
-      id: 'steps',
-      icon: <DirectionsRunIcon fontSize="small" />,
-      name: 'Daily Steps',
-      current: 8542,
-      target: 10000,
-      unit: 'steps',
-      color: '#3f51b5'
+      id: 'medication',
+      text: 'Take all medications today',
+      completed: true,
     },
     {
-      id: 'heartRate',
-      icon: <FavoriteIcon fontSize="small" />,
-      name: 'Cardio Exercise',
-      current: 25,
-      target: 30,
-      unit: 'minutes',
-      color: '#f44336'
+      id: 'checkup',
+      text: 'Schedule annual physical',
+      completed: false,
     },
     {
       id: 'nutrition',
-      icon: <LocalDiningIcon fontSize="small" />,
-      name: 'Water Intake',
-      current: 1.8,
-      target: 2.5,
-      unit: 'liters',
-      color: '#2196f3'
+      text: 'Log today\'s meals',
+      completed: false,
     },
     {
-      id: 'sleep',
-      icon: <HotelIcon fontSize="small" />,
-      name: 'Sleep',
-      current: 6.5,
-      target: 8,
-      unit: 'hours',
-      color: '#9c27b0'
+      id: 'labwork',
+      text: 'Review lab results',
+      completed: false,
     }
   ];
 
-  const calculateProgress = (current, target) => {
-    return Math.min(Math.round((current / target) * 100), 100);
-  };
+  const completedCount = goals.filter(goal => goal.completed).length;
 
   return (
-    <Paper elevation={0} sx={{ 
-      p: 3, 
-      border: '1px solid', 
-      borderColor: 'divider',
-      transition: 'transform 0.2s',
-      '&:hover': {
-        transform: 'translateY(-4px)',
-      }
-    }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h6">Health Goals</Typography>
-        <Chip 
-          label="Weekly View" 
-          color="primary" 
-          size="small" 
-          variant="outlined" 
-        />
-      </Box>
+    <Paper elevation={0} sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}>
+      <Typography variant="h6" sx={{ mb: 2 }}>Health Goals</Typography>
       
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        {completedCount} of {goals.length} completed
+      </Typography>
+      
+      <List>
         {goals.map((goal) => (
-          <Box key={goal.id}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ 
-                  mr: 1, 
-                  bgcolor: `${goal.color}20`, 
-                  color: goal.color,
-                  borderRadius: '50%',
-                  width: 28,
-                  height: 28,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  {goal.icon}
-                </Box>
-                <Typography variant="body2">{goal.name}</Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                {goal.current} / {goal.target} {goal.unit}
-              </Typography>
-            </Box>
-            
-            <Box sx={{ position: 'relative' }}>
-              <LinearProgress 
-                variant="determinate" 
-                value={calculateProgress(goal.current, goal.target)} 
-                sx={{ 
-                  height: 8, 
-                  borderRadius: 1,
-                  backgroundColor: `${goal.color}20`,
-                  '& .MuiLinearProgress-bar': {
-                    backgroundColor: goal.color
-                  }
-                }}
-              />
-            </Box>
-          </Box>
+          <ListItem 
+            key={goal.id}
+            disableGutters
+            sx={{ py: 1.5 }}
+          >
+            <Checkbox 
+              edge="start"
+              checked={goal.completed}
+              size="small"
+              sx={{ ml: -0.5, mr: 0.5 }}
+            />
+            <ListItemText 
+              primary={goal.text}
+              primaryTypographyProps={{ 
+                variant: 'body2',
+                sx: { 
+                  textDecoration: goal.completed ? 'line-through' : 'none',
+                  color: goal.completed ? 'text.disabled' : 'text.primary',
+                }
+              }}
+            />
+          </ListItem>
         ))}
-      </Box>
+      </List>
     </Paper>
   );
 };

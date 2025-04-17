@@ -16,9 +16,11 @@ app.use(express.json());
 // Routes
 const authRoutes = require('./routes/auth');
 const symptomRoutes = require('./routes/symptoms');
+const diagnosisRoutes = require('./routes/diagnosis');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/symptoms', symptomRoutes);
+app.use('/api/diagnosis', diagnosisRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -38,4 +40,4 @@ sequelize.sync({ alter: true })
     })
     .catch(err => {
         console.error('Database sync error:', err);
-    }); 
+    });

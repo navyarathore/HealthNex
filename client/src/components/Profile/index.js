@@ -70,23 +70,6 @@ const Profile = () => {
     return bmi;
   }
 
-  const [diagnosisHistory] = useState([
-    {
-      id: 1,
-      date: '2023-05-15',
-      condition: 'Common Cold',
-      confidence: 85,
-      symptoms: ['Cough', 'Fever', 'Runny nose'],
-    },
-    {
-      id: 2,
-      date: '2023-04-20',
-      condition: 'Seasonal Allergies',
-      confidence: 92,
-      symptoms: ['Sneezing', 'Itchy eyes', 'Runny nose'],
-    },
-  ]);
-
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -168,7 +151,7 @@ const Profile = () => {
           />
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <ProfileDiagnosis diagnosisHistory={diagnosisHistory} loading={loading} />
+          <ProfileDiagnosis />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           <ProfileEmergency 

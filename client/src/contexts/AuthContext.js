@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
     createdAt: new Date().toISOString()
   }); // Mock profile
   const [loading, setLoading] = useState(false); // Set to false to skip loading state
+  const [userToken, setUserToken] = useState('mock-jwt-token-for-testing-123456789');
 
   // Commented out for testing
   async function signup(email, password) {
@@ -126,6 +127,23 @@ export function AuthProvider({ children }) {
     return userProfile;
   }
 
+  // Added function to get authentication token for API requests
+  async function getToken() {
+    /*
+    try {
+      if (!currentUser) throw new Error('No user is currently signed in.');
+      const token = await currentUser.getIdToken();
+      return token;
+    } catch (error) {
+      throw new Error('Failed to get authentication token: ' + error.message);
+    }
+    */
+    
+    // Mock implementation - return a static mock token
+    // In a real implementation, this would get a JWT token from Firebase
+    return userToken;
+  }
+
   // Commented out auth state listener
   useEffect(() => {
     /*
@@ -160,7 +178,8 @@ export function AuthProvider({ children }) {
     login,
     logout,
     updateProfile,
-    getProfile
+    getProfile,
+    getToken
   };
 
   return (
