@@ -3,14 +3,12 @@ import { Container, Box, Alert } from '@mui/material';
 import DiagnosisHeader from './DiagnosisHeader';
 import DiagnosisForm from './DiagnosisForm';
 import DiagnosisResults from './DiagnosisResults';
-import { useAuth } from '../../contexts/AuthContext';
 
 const Diagnosis = () => {
   const [symptoms, setSymptoms] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
   const [error, setError] = useState(null);
-  const { getToken } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,24 +16,28 @@ const Diagnosis = () => {
     setError(null);
     
     try {
-      const token = await getToken();
-      const response = await fetch('/api/diagnosis/analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ symptoms })
+      // Simulate AI diagnosis (replace with actual API call)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Mock diagnosis response
+      setDiagnosis({
+        condition: "Common Cold",
+        confidence: 85,
+        symptoms: [
+          "Runny nose",
+          "Sore throat",
+          "Cough",
+          "Mild fever"
+        ],
+        recommendations: [
+          "Get plenty of rest",
+          "Stay hydrated",
+          "Use over-the-counter cold medicine",
+          "Monitor temperature",
+          "Consult a doctor if symptoms worsen"
+        ]
       });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const diagnosisData = await response.json();
-      setDiagnosis(diagnosisData);
     } catch (err) {
-      console.error("Error getting diagnosis:", err);
       setError("Failed to get diagnosis. Please try again.");
     } finally {
       setIsLoading(false);
@@ -52,7 +54,7 @@ const Diagnosis = () => {
           onSubmit={handleSubmit}
           onInputChange={(e) => setSymptoms(e.target.value)}
         />
-        {diagnosis && <DiagnosisResults diagnosis={diagnosis} />}
+        <DiagnosisResults diagnosis={diagnosis} />
         {error && (
           <Alert severity="error" sx={{ mt: 2 }}>
             {error}
@@ -63,4 +65,4 @@ const Diagnosis = () => {
   );
 };
 
-export default Diagnosis;
+export default Diagnosis; 

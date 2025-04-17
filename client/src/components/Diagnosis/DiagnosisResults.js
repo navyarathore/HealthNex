@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  Alert,
 } from '@mui/material';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 
@@ -30,48 +31,62 @@ const DiagnosisResults = ({ diagnosis }) => {
         </Typography>
       </Box>
 
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" gutterBottom>
-          {diagnosis.condition}
-        </Typography>
-        <Chip
-          label={`${diagnosis.confidence}% Confidence`}
-          color="primary"
-          variant="outlined"
-          sx={{ mb: 2 }}
-        />
-      </Box>
+      {diagnosis.message && (
+        <Alert severity="info" sx={{ mb: 3 }}>
+          {diagnosis.message}
+        </Alert>
+      )}
 
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="subtitle1" gutterBottom>
-          Identified Symptoms:
-        </Typography>
-        <List dense>
-          {diagnosis.symptoms.map((symptom, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={symptom} />
-            </ListItem>
-          ))}
-        </List>
-      </Box>
+      {diagnosis.condition && (
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" gutterBottom>
+            {diagnosis.condition}
+          </Typography>
+          {diagnosis.confidence > 0 && (
+            <Chip
+              label={`${diagnosis.confidence}% Confidence`}
+              color="primary"
+              variant="outlined"
+              sx={{ mb: 2 }}
+            />
+          )}
+        </Box>
+      )}
 
-      <Box>
-        <Typography variant="subtitle1" gutterBottom>
-          Recommendations:
-        </Typography>
-        <List dense>
-          {diagnosis.recommendations.map((recommendation, index) => (
-            <React.Fragment key={index}>
-              <ListItem>
-                <ListItemText primary={recommendation} />
+      {diagnosis.symptoms && diagnosis.symptoms.length > 0 && (
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="subtitle1" gutterBottom>
+            Identified Symptoms:
+          </Typography>
+          <List dense>
+            {diagnosis.symptoms.map((symptom, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={symptom} />
               </ListItem>
-              {index < diagnosis.recommendations.length - 1 && <Divider />}
-            </React.Fragment>
-          ))}
-        </List>
-      </Box>
+            ))}
+          </List>
+        </Box>
+      )}
+
+      {diagnosis.recommendations && diagnosis.recommendations.length > 0 && (
+        <Box>
+          <Typography variant="subtitle1" gutterBottom>
+            Recommendations:
+          </Typography>
+          <List dense>
+            {diagnosis.recommendations.map((recommendation, index) => (
+              <React.Fragment key={index}>
+                <ListItem>
+                  <ListItemText primary={recommendation} />
+                </ListItem>
+                {index < diagnosis.recommendations.length - 1 && <Divider />}
+              </React.Fragment>
+            ))}
+          </List>
+        </Box>
+      )}
     </Paper>
   );
 };
 
-export default DiagnosisResults; 
+export default DiagnosisResults;

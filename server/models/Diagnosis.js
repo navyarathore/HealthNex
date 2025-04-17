@@ -29,6 +29,10 @@ const Diagnosis = sequelize.define('Diagnosis', {
         type: DataTypes.JSON, // Store recommendations as a JSON array
         allowNull: false
     },
+    message: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     date: {
         type: DataTypes.DATE,
         allowNull: false,

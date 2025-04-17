@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Diagnosis = require('../models/Diagnosis');
 const User = require('../models/User');
-const { analyzeSymptoms } = require('../services/aiDiagnosisService');
+// Removed the import of aiDiagnosisService
 
 // Middleware to verify JWT token
 const auth = async (req, res, next) => {
@@ -17,7 +17,7 @@ const auth = async (req, res, next) => {
     }
 };
 
-// Get AI diagnosis for symptoms
+// Get diagnosis for symptoms
 router.post('/analyze', auth, async (req, res) => {
     try {
         const { symptoms } = req.body;
@@ -26,16 +26,24 @@ router.post('/analyze', auth, async (req, res) => {
             return res.status(400).json({ message: 'Symptoms description is required' });
         }
         
-        // Get AI diagnosis
-        const diagnosisResult = analyzeSymptoms(symptoms);
+        // Response object for diagnosis unavailability
+        const diagnosisResult = {
+            message: "AI diagnosis functionality is not available.",
+            symptoms: ["No symptoms analyzed"],
+            recommendations: [
+                "Please consult with a healthcare provider for an accurate diagnosis",
+                "This application does not provide medical diagnosis"
+            ]
+        };
         
-        // Store diagnosis in database
+        // Store diagnosis in database (with modified structure)
         const savedDiagnosis = await Diagnosis.create({
             userId: req.userId,
-            condition: diagnosisResult.condition,
-            confidence: diagnosisResult.confidence,
+            condition: "No diagnosis available",
+            confidence: 0,
             symptoms: diagnosisResult.symptoms,
             recommendations: diagnosisResult.recommendations,
+            message: diagnosisResult.message,
             date: new Date()
         });
         
