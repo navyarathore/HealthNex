@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import {
   Container,
   Typography,
@@ -6,17 +6,17 @@ import {
   Box,
   Paper,
   Avatar,
-  useTheme,
-  useMediaQuery,
+  // useTheme,
+  // useMediaQuery,
   Link,
   IconButton,
   Chip,
-  Divider,
-  Button,
-  TextField,
+  // Divider,
+  // Button,
+  // TextField,
   Card,
   CardContent,
-  Stack
+  // Stack
 } from '@mui/material';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
@@ -30,8 +30,8 @@ import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
-import SendIcon from '@mui/icons-material/Send';
-import EmailIcon from '@mui/icons-material/Email';
+// import SendIcon from '@mui/icons-material/Send';
+// import EmailIcon from '@mui/icons-material/Email';
 import Layout from '../components/Layout';
 
 // Tech stack card component
@@ -118,46 +118,131 @@ const TeamMemberCard = ({ name, role, image, linkedin, github, skills }) => (
       alignItems: 'center',
       textAlign: 'center',
       transition: 'all 0.3s ease-in-out',
-      background: 'linear-gradient(145deg, #1E293B, #0F172A)',
+      background: 'linear-gradient(165deg, #1E293B 0%, #0F172A 100%)',
       border: '1px solid rgba(96, 165, 250, 0.1)',
+      position: 'relative',
+      overflow: 'hidden',
       '&:hover': {
-        transform: 'translateY(-5px)',
-        boxShadow: '0 8px 16px rgba(96, 165, 250, 0.2)',
-        border: '1px solid rgba(96, 165, 250, 0.2)',
-        background: 'linear-gradient(145deg, #1E293B, #1A1F2C)',
+        transform: 'translateY(-8px)',
+        boxShadow: '0 12px 24px rgba(96, 165, 250, 0.2)',
+        '& .member-overlay': {
+          opacity: 1
+        }
+      },
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '40%',
+        background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.1), transparent)',
+        borderRadius: '4px 4px 0 0'
       }
     }}
   >
     <Avatar
       src={image}
       sx={{
-        width: 120,
-        height: 120,
+        width: 130,
+        height: 130,
         mb: 2,
-        boxShadow: '0 4px 8px rgba(96, 165, 250, 0.2)'
+        border: '4px solid rgba(96, 165, 250, 0.3)',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+        transition: 'all 0.3s ease-in-out',
+        '&:hover': {
+          transform: 'scale(1.05)',
+          border: '4px solid rgba(96, 165, 250, 0.5)'
+        }
       }}
     />
-    <Typography variant="h5" component="h3" gutterBottom sx={{ color: 'primary.light' }}>
+    <Typography 
+      variant="h5" 
+      component="h3" 
+      gutterBottom 
+      sx={{ 
+        color: 'primary.light',
+        fontWeight: 600,
+        letterSpacing: '0.5px'
+      }}
+    >
       {name}
     </Typography>
-    <Typography variant="body1" color="text.secondary" gutterBottom>
+    <Typography 
+      variant="subtitle1" 
+      sx={{ 
+        color: 'rgba(255, 255, 255, 0.7)',
+        mb: 2,
+        fontStyle: 'italic'
+      }}
+    >
       {role}
     </Typography>
-    <Box sx={{ mt: 2, mb: 2 }}>
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: 1, 
+        justifyContent: 'center',
+        mb: 3,
+        maxWidth: '100%'
+      }}
+    >
       {skills.map((skill, index) => (
         <Chip
           key={index}
           label={skill}
           size="small"
-          sx={{ m: 0.5, bgcolor: 'primary.dark', color: 'primary.light' }}
+          sx={{
+            bgcolor: 'rgba(96, 165, 250, 0.1)',
+            color: 'primary.light',
+            border: '1px solid rgba(96, 165, 250, 0.3)',
+            '&:hover': {
+              bgcolor: 'rgba(96, 165, 250, 0.2)',
+            }
+          }}
         />
       ))}
     </Box>
-    <Box sx={{ mt: 'auto', pt: 2 }}>
-      <IconButton component={Link} href={linkedin} target="_blank" sx={{ color: 'primary.light' }}>
+    <Box 
+      sx={{ 
+        mt: 'auto',
+        pt: 2,
+        width: '100%',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 2
+      }}
+    >
+      <IconButton 
+        component={Link} 
+        href={linkedin} 
+        target="_blank"
+        sx={{ 
+          color: 'primary.light',
+          '&:hover': {
+            color: '#0077B5',
+            transform: 'translateY(-2px)'
+          },
+          transition: 'all 0.2s ease-in-out'
+        }}
+      >
         <LinkedInIcon />
       </IconButton>
-      <IconButton component={Link} href={github} target="_blank" sx={{ color: 'primary.light' }}>
+      <IconButton 
+        component={Link} 
+        href={github} 
+        target="_blank"
+        sx={{ 
+          color: 'primary.light',
+          '&:hover': {
+            color: '#fff',
+            transform: 'translateY(-2px)'
+          },
+          transition: 'all 0.2s ease-in-out'
+        }}
+      >
         <GitHubIcon />
       </IconButton>
     </Box>
@@ -165,59 +250,59 @@ const TeamMemberCard = ({ name, role, image, linkedin, github, skills }) => (
 );
 
 const About = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [feedbackForm, setFeedbackForm] = useState({ name: '', email: '', message: '' });
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const [feedbackForm, setFeedbackForm] = useState({ name: '', email: '', message: '' });
   
-  const handleFeedbackChange = (e) => {
-    setFeedbackForm({
-      ...feedbackForm,
-      [e.target.name]: e.target.value
-    });
-  };
+  // const handleFeedbackChange = (e) => {
+  //   setFeedbackForm({
+  //     ...feedbackForm,
+  //     [e.target.name]: e.target.value
+  //   });
+  // };
   
-  const handleFeedbackSubmit = (e) => {
-    e.preventDefault();
-    // In a real application, you would send this data to your backend
-    console.log('Feedback submitted:', feedbackForm);
-    // Reset form
-    setFeedbackForm({ name: '', email: '', message: '' });
-    // Show confirmation (in a real app, you might use a snackbar)
-    alert('Thank you for your feedback!');
-  };
+  // const handleFeedbackSubmit = (e) => {
+  //   e.preventDefault();
+  //   // In a real application, you would send this data to your backend
+  //   console.log('Feedback submitted:', feedbackForm);
+  //   // Reset form
+  //   setFeedbackForm({ name: '', email: '', message: '' });
+  //   // Show confirmation (in a real app, you might use a snackbar)
+  //   alert('Thank you for your feedback!');
+  // };
 
   const teamMembers = [
     {
-      name: 'John Doe',
-      role: 'Frontend Developer',
-      image: 'https://i.pravatar.cc/150?img=1',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      github: 'https://github.com/johndoe',
-      skills: ['React', 'Material-UI', 'JavaScript', 'TypeScript']
-    },
-    {
-      name: 'Jane Smith',
+      name: 'Navya Rathore',
       role: 'Backend Developer',
-      image: 'https://i.pravatar.cc/150?img=2',
-      linkedin: 'https://linkedin.com/in/janesmith',
-      github: 'https://github.com/janesmith',
-      skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs']
+      image: 'https://github.com/navyarathore.png',
+      linkedin: 'https://linkedin.com/in/navya-rathore',
+      github: 'https://github.com/navyarathore',
+      skills: ['Node.js', 'Express', 'MongoDB', 'API Development', 'Authentication']
     },
     {
-      name: 'Mike Johnson',
+      name: 'Twinkle Rana',
+      role: 'Frontend Developer',
+      image: 'https://github.com/twinklerana.png',
+      linkedin: 'https://linkedin.com/in/twinklerana',
+      github: 'https://github.com/twinklerana',
+      skills: ['React', 'Material-UI', 'JavaScript', 'State Management', 'Responsive Design']
+    },
+    {
+      name: 'Nauras Rizvi',
       role: 'UI/UX Designer',
-      image: 'https://i.pravatar.cc/150?img=3',
-      linkedin: 'https://linkedin.com/in/mikejohnson',
-      github: 'https://github.com/mikejohnson',
-      skills: ['Figma', 'Adobe XD', 'UI Design', 'User Research']
+      image: 'https://github.com/naurasrizvi.png',
+      linkedin: 'https://linkedin.com/in/naurasrizvi',
+      github: 'https://github.com/naurasrizvi',
+      skills: ['UI Design', 'User Research', 'Prototyping', 'Wireframing', 'User Testing']
     },
     {
-      name: 'Sarah Williams',
-      role: 'Project Manager',
-      image: 'https://i.pravatar.cc/150?img=4',
-      linkedin: 'https://linkedin.com/in/sarahwilliams',
-      github: 'https://github.com/sarahwilliams',
-      skills: ['Agile', 'Scrum', 'Project Planning', 'Team Leadership']
+      name: 'Aryan Varshney',
+      role: 'AI Developer',
+      image: 'https://github.com/aryanvarshney.png',
+      linkedin: 'https://linkedin.com/in/aryanvarshney',
+      github: 'https://github.com/aryanvarshney',
+      skills: ['Machine Learning', 'Health Analytics', 'Python', 'Data Processing', 'Model Training']
     }
   ];
 
@@ -257,28 +342,23 @@ const About = () => {
   const projectTimeline = [
     {
       date: 'January 2025',
-      title: 'Project Kickoff',
-      description: 'Initial planning, requirements gathering, and team formation'
+      title: 'Project Inception',
+      description: 'Project planning, team formation, and initial requirements gathering'
     },
     {
       date: 'February 2025',
-      title: 'Design & Architecture',
-      description: 'UI/UX design, database schema design, and system architecture planning'
+      title: 'Design & Development Phase',
+      description: 'UI/UX design, system architecture, and core feature development'
     },
     {
       date: 'March 2025',
-      title: 'Development Phase',
-      description: 'Core functionality implementation, frontend and backend development'
+      title: 'Implementation & Testing',
+      description: 'Feature implementation, integration testing, and user feedback collection'
     },
     {
       date: 'April 2025',
-      title: 'Testing & Refinement',
-      description: 'User testing, bug fixing, and feature refinement based on feedback'
-    },
-    {
-      date: 'May 2025',
-      title: 'Deployment',
-      description: 'Final deployment and presentation of the complete application'
+      title: 'Final Release',
+      description: 'Bug fixes, performance optimization, and project deployment'
     }
   ];
 
@@ -319,12 +399,12 @@ const About = () => {
             align="center"
             sx={{ maxWidth: 800, mx: 'auto', opacity: 0.9 }}
           >
-            A Semester Project by Computer Science Students
+            A 4th Semester Project by Team 1
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
             <Chip
               icon={<SchoolIcon />}
-              label="CS 401 - Software Engineering"
+              label="CSET 210 - Design Thinking and Innovation"
               sx={{ bgcolor: 'rgba(255, 255, 255, 0.1)', color: 'white' }}
             />
           </Box>

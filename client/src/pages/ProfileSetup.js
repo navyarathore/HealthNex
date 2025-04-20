@@ -35,7 +35,7 @@ export default function ProfileSetup() {
       setError('');
       setLoading(true);
       await updateProfile(formData);
-      navigate('/');
+      navigate('/dashboard');  // Changed from '/' to '/dashboard'
     } catch (error) {
       setError('Failed to update profile: ' + error.message);
     }
@@ -159,4 +159,4 @@ export default function ProfileSetup() {
       </div>
     </Container>
   );
-} 
+}

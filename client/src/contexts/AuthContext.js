@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { auth, db } from '../firebase';
+// import { auth, db } from '../firebase';
 // import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+// import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -10,15 +10,14 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState({ uid: 'test-user-123', email: 'test@example.com' }); // Mock user
-  const [userProfile, setUserProfile] = useState({
-    firstName: 'Test',
-    lastName: 'User',
-    email: 'test@example.com',
-    createdAt: new Date().toISOString()
-  }); // Mock profile
-  const [loading, setLoading] = useState(false); // Set to false to skip loading state
-  const [userToken, setUserToken] = useState('mock-jwt-token-for-testing-123456789');
+  // Start with no current user for testing authentication flow
+  const [currentUser, setCurrentUser] = useState(null); // Initially not authenticated
+  const [userProfile, setUserProfile] = useState(null); // Initially no profile
+  // const [loading, setLoading] = useState(false); // Set to false to skip loading state
+  const [userToken, setUserToken] = useState(null); // Initially no token
+
+  // Add isAuthenticated getter based on currentUser
+  const isAuthenticated = !!currentUser;
 
   // Commented out for testing
   async function signup(email, password) {
@@ -46,35 +45,42 @@ export function AuthProvider({ children }) {
 
   // Commented out for testing
   async function login(email, password) {
-    /*
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
-    } catch (error) {
-      let errorMessage = 'Failed to sign in.';
-      switch (error.code) {
-        case 'auth/user-not-found':
-          errorMessage = 'No account found with this email.';
-          break;
-        case 'auth/wrong-password':
-          errorMessage = 'Incorrect password.';
-          break;
-        case 'auth/too-many-requests':
-          errorMessage = 'Too many failed attempts. Please try again later.';
-          break;
-        case 'auth/invalid-email':
-          errorMessage = 'Invalid email address.';
-          break;
-        default:
-          errorMessage = error.message;
-      }
-      throw new Error(errorMessage);
-    }
-    */
-    
     // Mock implementation
     console.log('Mock login with:', email, password);
-    return { uid: 'test-user-123', email };
+    const mockUser = { uid: 'test-user-123', email };
+    
+    // Set the current user state to update authentication status
+    setCurrentUser(mockUser);
+    
+    // Set complete mock profile data 
+    setUserProfile({
+      firstName: 'Test',
+      lastName: 'User',
+      email,
+      age: '28',
+      gender: 'male',
+      bloodType: 'O+',
+      height: '175',
+      weight: '70',
+      bloodPressure: '120/80',
+      heartRate: '72',
+      allergies: 'None',
+      medications: 'None',
+      medicalConditions: 'None',
+      lastCheckup: '2025-03-15',
+      nextCheckup: '2025-09-15',
+      createdAt: new Date().toISOString(),
+      emergencyContact: {
+        name: 'Emergency Contact',
+        relationship: 'Family',
+        phone: '123-456-7890'
+      }
+    });
+    
+    // Set mock token
+    setUserToken('mock-jwt-token-for-testing-123456789');
+    
+    return mockUser;
   }
 
   // Commented out for testing
@@ -89,6 +95,12 @@ export function AuthProvider({ children }) {
     
     // Mock implementation
     console.log('Mock logout');
+    
+    // Clear user data on logout
+    setCurrentUser(null);
+    setUserProfile(null);
+    setUserToken(null);
+    
     return true;
   }
 
@@ -179,7 +191,8 @@ export function AuthProvider({ children }) {
     logout,
     updateProfile,
     getProfile,
-    getToken
+    getToken,
+    isAuthenticated  // Add isAuthenticated to the context value
   };
 
   return (

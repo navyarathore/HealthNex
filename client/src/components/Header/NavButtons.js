@@ -15,12 +15,12 @@ const NavButtons = ({ isActive, navigate }) => {
       </Button>
       <Button
         color="inherit"
-        onClick={() => navigate('/appointments')}
+        onClick={() => navigate('/diagnosis')}
         sx={{
-          backgroundColor: isActive('/appointments') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+          backgroundColor: isActive('/diagnosis') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
         }}
       >
-        Appointments
+        Diagnosis
       </Button>
       <Button
         color="inherit"
@@ -41,4 +41,4 @@ const NavButtons = ({ isActive, navigate }) => {
   );
 };
 
-export default NavButtons; 
+export default NavButtons;

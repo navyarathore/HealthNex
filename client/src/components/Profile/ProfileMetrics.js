@@ -65,9 +65,9 @@ const ProfileMetrics = ({ profileData, loading = false }) => {
     { icon: <Bloodtype />, label: 'Blood Type', value: profileData?.bloodType || 'Not specified' },
     { icon: <Height />, label: 'Height', value: formatHeight(profileData?.height) },
     { icon: <Scale />, label: 'Weight', value: formatWeight(profileData?.weight) },
-    { icon: <MonitorHeart />, label: 'BMI', value: profileData?.bmi ? `${profileData.bmi} ${getBMICategory(profileData.bmi)}` : 'Not calculated' },
-    { icon: <LocalHospital />, label: 'Blood Pressure', value: profileData?.bloodPressure || 'Not specified' },
-    { icon: <FitnessCenter />, label: 'Heart Rate', value: profileData?.heartRate ? `${profileData.heartRate} bpm` : 'Not specified' },
+    // { icon: <MonitorHeart />, label: 'BMI', value: profileData?.bmi ? `${profileData.bmi} ${getBMICategory(profileData.bmi)}` : 'Not calculated' },
+    // { icon: <LocalHospital />, label: 'Blood Pressure', value: profileData?.bloodPressure || 'Not specified' },
+    // { icon: <FitnessCenter />, label: 'Heart Rate', value: profileData?.heartRate ? `${profileData.heartRate} bpm` : 'Not specified' },
   ];
 
   const medicalInfo = [

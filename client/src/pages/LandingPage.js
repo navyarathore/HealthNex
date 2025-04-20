@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -18,17 +18,17 @@ import {
   ListItemText,
   Chip,
   Stack,
-  TextField,
-  Divider,
+  // TextField,
+  // Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  IconButton,
-  Tooltip,
+  // IconButton,
+  // Tooltip,
   Fade,
   Zoom,
   Grow,
-  CircularProgress
+  // CircularProgress
 } from '@mui/material';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import TimelineIcon from '@mui/icons-material/Timeline';
@@ -38,17 +38,15 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import InsightsIcon from '@mui/icons-material/Insights';
 import PatternIcon from '@mui/icons-material/Pattern';
-import LandingNav from '../components/LandingNav';
-import Footer from '../components/Footer';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import PersonIcon from '@mui/icons-material/Person';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
 import SpeedIcon from '@mui/icons-material/Speed';
-import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+// import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import SendIcon from '@mui/icons-material/Send';
+// import SendIcon from '@mui/icons-material/Send';
 
 const FeatureCard = ({ icon, title, description }) => (
   <Paper
@@ -358,25 +356,25 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [email, setEmail] = useState('');
-  const [isSubscribing, setIsSubscribing] = useState(false);
-  const [subscriptionStatus, setSubscriptionStatus] = useState(null);
+  // const [email, setEmail] = useState('');
+  // const [isSubscribing, setIsSubscribing] = useState(false);
+  // const [subscriptionStatus, setSubscriptionStatus] = useState(null);
 
-  const handleSubscribe = () => {
-    if (!email) return;
+  // const handleSubscribe = () => {
+  //   if (!email) return;
     
-    setIsSubscribing(true);
+  //   setIsSubscribing(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubscribing(false);
-      setSubscriptionStatus('success');
-      setEmail('');
+  //   // Simulate API call
+  //   setTimeout(() => {
+  //     setIsSubscribing(false);
+  //     setSubscriptionStatus('success');
+  //     setEmail('');
       
-      // Reset status after 3 seconds
-      setTimeout(() => setSubscriptionStatus(null), 3000);
-    }, 1500);
-  };
+  //     // Reset status after 3 seconds
+  //     setTimeout(() => setSubscriptionStatus(null), 3000);
+  //   }, 1500);
+  // };
 
   const features = [
     {
@@ -532,7 +530,6 @@ const LandingPage = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <LandingNav />
       <Box sx={{ flex: 1 }}>
         {/* Hero Section - Enhanced with animations */}
         <Box
@@ -1045,115 +1042,6 @@ const LandingPage = () => {
           </Container>
         </Box>
 
-        {/* Newsletter Section - New
-        <Box
-          sx={{
-            py: 8,
-            background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)',
-            position: 'relative',
-            overflow: 'hidden',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'radial-gradient(circle at bottom left, rgba(96, 165, 250, 0.1), transparent 40%)',
-              pointerEvents: 'none'
-            }
-          }}
-        >
-          <Container maxWidth="md">
-            <Grid container spacing={4} alignItems="center">
-              <Grid item xs={12} md={7}>
-                <Typography
-                  variant="h3"
-                  component="h2"
-                  sx={{ 
-                    fontWeight: 800,
-                    color: 'white',
-                    mb: 2,
-                  }}
-                >
-                  Stay Updated
-                </Typography>
-                <Typography
-                  variant="h6"
-                  sx={{ 
-                    color: 'rgba(255, 255, 255, 0.9)',
-                    mb: 3,
-                    lineHeight: 1.6
-                  }}
-                >
-                  Subscribe to our newsletter for the latest health insights, tips, and feature updates.
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={5}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    gap: 1
-                  }}
-                >
-                  <TextField
-                    fullWidth
-                    placeholder="Enter your email"
-                    variant="outlined"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={isSubscribing || subscriptionStatus === 'success'}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        bgcolor: 'rgba(255, 255, 255, 0.9)',
-                        borderRadius: 2,
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                          borderColor: 'white',
-                        },
-                      },
-                    }}
-                  />
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    disabled={!email || isSubscribing || subscriptionStatus === 'success'}
-                    onClick={handleSubscribe}
-                    startIcon={
-                      isSubscribing ? (
-                        <CircularProgress size={20} color="inherit" />
-                      ) : subscriptionStatus === 'success' ? (
-                        <CheckCircleIcon />
-                      ) : (
-                        <SendIcon />
-                      )
-                    }
-                    sx={{
-                      py: isMobile ? 1.5 : 2,
-                      px: 3,
-                      bgcolor: 'white',
-                      color: 'primary.main',
-                      fontWeight: 'bold',
-                      borderRadius: 2,
-                      '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.9)',
-                        transform: 'translateY(-2px)',
-                      },
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {isSubscribing
-                      ? 'Subscribing...'
-                      : subscriptionStatus === 'success'
-                      ? 'Subscribed!'
-                      : 'Subscribe'}
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
-        </Box> */}
-
         {/* Testimonials Section */}
         <Box sx={{ py: 8, background: 'linear-gradient(180deg, #0F172A 0%, #1E293B 100%)' }}>
           <Container maxWidth="lg">
@@ -1276,7 +1164,6 @@ const LandingPage = () => {
           </Container>
         </Box>
       </Box>
-      <Footer />
     </Box>
   );
 };

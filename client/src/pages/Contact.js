@@ -18,8 +18,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LandingNav from '../components/LandingNav';
-import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -99,8 +98,7 @@ const Contact = () => {
   };
   
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <LandingNav />
+    <Layout>
       <Box sx={{ flex: 1 }}>
         {/* Hero Section */}
         <Box
@@ -172,9 +170,9 @@ const Contact = () => {
                         Address
                       </Typography>
                       <Typography variant="body2">
-                        123 Health Avenue<br />
-                        Innovation Building, 4th Floor<br />
-                        San Francisco, CA 94103
+                        Bennett University<br />
+                        Tech Zone 2, Gautam Buddh Nagar<br />
+                        Greater Noida, Uttar Pradesh 201310<br />
                       </Typography>
                     </Box>
                   </Box>
@@ -186,7 +184,7 @@ const Contact = () => {
                         Phone
                       </Typography>
                       <Typography variant="body2">
-                        +1 (555) 123-4567<br />
+                        +91 xxxxx xxxxx<br />
                         Mon-Fri 9AM to 6PM
                       </Typography>
                     </Box>
@@ -216,8 +214,7 @@ const Contact = () => {
                       </Typography>
                       <Typography variant="body2">
                         Monday - Friday: 9AM - 6PM<br />
-                        Saturday: 10AM - 3PM<br />
-                        Sunday: Closed
+                        Saturday & Sunday: Closed<br />
                       </Typography>
                     </Box>
                   </Box>
@@ -473,8 +470,6 @@ const Contact = () => {
         </Container>
       </Box>
       
-      <Footer />
-      
       {/* Success/Error messages */}
       <Snackbar
         open={submitSuccess}
@@ -497,7 +492,7 @@ const Contact = () => {
           There was an error sending your message. Please try again later.
         </Alert>
       </Snackbar>
-    </Box>
+    </Layout>
   );
 };
 

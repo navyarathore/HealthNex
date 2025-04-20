@@ -9,10 +9,10 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  useTheme,
-  useMediaQuery,
+  // useTheme,
+  // useMediaQuery,
   Button,
-  Divider,
+  // Divider,
   Table,
   TableBody,
   TableCell,
@@ -21,7 +21,7 @@ import {
   TableRow,
   Chip,
   Card,
-  CardContent,
+  // CardContent,
   CardMedia,
   Fade
 } from '@mui/material';
@@ -32,19 +32,17 @@ import {
   Assessment as AssessmentIcon,
   Share as ShareIcon,
   Security as SecurityIcon,
-  DevicesOther as DevicesOtherIcon,
+  // DevicesOther as DevicesOtherIcon,
   Psychology as PsychologyIcon,
   Check as CheckIcon,
   Close as CloseIcon,
   ArrowForward as ArrowForwardIcon
 } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
-import LandingNav from '../components/LandingNav';
-import Footer from '../components/Footer';
 
 const FeatureSection = ({ title, description, icon, features }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Grid item xs={12} md={6}>
@@ -220,8 +218,8 @@ const ComparisonTable = () => {
 };
 
 const Features = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const features = [
     {
@@ -317,7 +315,7 @@ const Features = () => {
       background: 'linear-gradient(180deg, #121212 0%, #1a1a1a 100%)',
       color: 'rgba(255, 255, 255, 0.87)'
     }}>
-      <LandingNav />
+      {/* Header is already included via Layout component, so we don't need LandingNav here */}
       
       {/* Hero Section */}
       <Box sx={{
@@ -554,8 +552,6 @@ const Features = () => {
           </Box>
         </Container>
       </Box>
-
-      <Footer />
     </Box>
   );
 };

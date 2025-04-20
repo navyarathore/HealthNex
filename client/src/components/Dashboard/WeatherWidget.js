@@ -20,7 +20,7 @@ const WeatherWidget = () => {
         
         // Mock weather data
         setWeather({
-          location: 'New York, NY',
+          location: 'Greater Noida, UP',
           current: {
             temp: 72,
             condition: 'Clear',

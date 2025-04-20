@@ -88,8 +88,8 @@ const Register = () => {
           createdAt: new Date().toISOString(),
         });
         
-        // Redirect to login page
-        navigate('/login');
+        // Redirect to profile setup page instead of login
+        navigate('/profile-setup');
       } catch (error) {
         console.error('Registration error:', error);
         setSubmitError(error.message || 'Registration failed. Please try again.');

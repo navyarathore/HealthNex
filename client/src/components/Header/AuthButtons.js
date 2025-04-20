@@ -6,6 +6,33 @@ const AuthButtons = ({ isActive, navigate }) => {
     <>
       <Button
         color="inherit"
+        onClick={() => navigate('/features')}
+        sx={{
+          backgroundColor: isActive('/features') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+        }}
+      >
+        Features
+      </Button>
+      <Button
+        color="inherit"
+        onClick={() => navigate('/about')}
+        sx={{
+          backgroundColor: isActive('/about') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+        }}
+      >
+        About
+      </Button>
+      <Button
+        color="inherit"
+        onClick={() => navigate('/contact')}
+        sx={{
+          backgroundColor: isActive('/contact') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+        }}
+      >
+        Contact
+      </Button>
+      <Button
+        color="inherit"
         onClick={() => navigate('/login')}
         sx={{
           backgroundColor: isActive('/login') ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
@@ -26,4 +53,4 @@ const AuthButtons = ({ isActive, navigate }) => {
   );
 };
 
-export default AuthButtons; 
+export default AuthButtons;

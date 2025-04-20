@@ -1,18 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, Snackbar } from '@mui/material';
-import WifiOffIcon from '@mui/icons-material/WifiOff';
+import { useState, useEffect } from 'react';
 import { isOnline, addNetworkStatusListener } from '../utils/firestoreHelper';
+import { checkServerConnection } from '../services/api';
 
 const OfflineIndicator = () => {
-  const [offline, setOffline] = useState(!isOnline());
+  const [internetOffline, setInternetOffline] = useState(!isOnline());
+  const [serverOffline, setServerOffline] = useState(false);
+  
+  // Check server connection
+  const checkServer = async () => {
+    try {
+      const result = await checkServerConnection();
+      setServerOffline(!result.connected);
+      if (!result.connected) {
+        console.warn("Cannot connect to the HealthNex server. The server may be down or restarting.");
+      }
+    } catch (error) {
+      console.error('Error checking server connection:', error);
+      setServerOffline(true);
+    }
+  };
   
   useEffect(() => {
+    // Initial server check
+    checkServer();
+    
+    // Set up periodic server checks (every 30 seconds)
+    const serverCheckInterval = setInterval(() => {
+      if (!internetOffline && !serverOffline) {
+        checkServer();
+      }
+    }, 30000);
+    
+    // Handle internet online/offline status
     const handleOnline = () => {
-      setOffline(false);
+      setInternetOffline(false);
+      console.log("Internet connection restored");
+      checkServer();
     };
     
     const handleOffline = () => {
-      setOffline(true);
+      setInternetOffline(true);
+      setServerOffline(true);
+      console.warn("You're currently offline. Please check your internet connection.");
     };
     
     // Add event listeners for online/offline status
@@ -20,28 +49,12 @@ const OfflineIndicator = () => {
     
     return () => {
       cleanup();
+      clearInterval(serverCheckInterval);
     };
-  }, []);
+  }, [internetOffline, serverOffline]);
   
-  return (
-    <Snackbar 
-      open={offline} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-    >
-      <Alert 
-        severity="warning" 
-        icon={<WifiOffIcon />}
-        sx={{ 
-          width: '100%',
-          backgroundColor: '#f8d7da',
-          color: '#721c24',
-          '& .MuiAlert-icon': { color: '#721c24' }
-        }}
-      >
-        You're currently offline. Some features may be limited.
-      </Alert>
-    </Snackbar>
-  );
+  // Return null since we don't want to render anything
+  return null;
 };
 
 export default OfflineIndicator;

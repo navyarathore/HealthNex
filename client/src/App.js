@@ -1,13 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline, Box, CircularProgress } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Layout from './components/Layout';
+import AuthenticatedApp from './components/AuthenticatedApp';
 import LandingPage from './pages/LandingPage';
 import Diagnosis from './components/Diagnosis';
 import Profile from './components/Profile';
 import PageNotFound from './components/PageNotFound';
 import { AuthProvider } from './contexts/AuthContext';
-import { useAuth } from './contexts/AuthContext';
+// import { useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProfileSetup from './pages/ProfileSetup';
@@ -15,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import Features from './pages/Features';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Logout from './pages/Logout';
 import OfflineIndicator from './components/OfflineIndicator';
 
 const theme = createTheme({
@@ -171,33 +173,33 @@ const theme = createTheme({
   },
 });
 
-function PrivateRoute({ children }) {
-  const { currentUser, userProfile, loading } = useAuth();
+// function PrivateRoute({ children }) {
+//   const { currentUser, userProfile, loading } = useAuth();
   
-  if (loading) {
-    return (
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        minHeight: '100vh' 
-      }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
+//   if (loading) {
+//     return (
+//       <Box sx={{ 
+//         display: 'flex', 
+//         justifyContent: 'center', 
+//         alignItems: 'center', 
+//         minHeight: '100vh' 
+//       }}>
+//         <CircularProgress />
+//       </Box>
+//     );
+//   }
 
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
+//   if (!currentUser) {
+//     return <Navigate to="/login" />;
+//   }
 
-  // If user is logged in but doesn't have a profile, redirect to profile setup
-  if (!userProfile && window.location.pathname !== '/profile-setup') {
-    return <Navigate to="/profile-setup" />;
-  }
+//   // If user is logged in but doesn't have a profile, redirect to profile setup
+//   if (!userProfile && window.location.pathname !== '/profile-setup') {
+//     return <Navigate to="/profile-setup" />;
+//   }
 
-  return children;
-}
+//   return children;
+// }
 
 function App() {
   return (
@@ -207,52 +209,23 @@ function App() {
         <Router>
           <OfflineIndicator />
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/features" element={<Features />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route
-              path="/profile-setup"
-              element={
-                <PrivateRoute>
-                  <Layout>
-                    <ProfileSetup />
-                  </Layout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Layout>
-                    <Dashboard />
-                  </Layout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/diagnosis"
-              element={
-                <PrivateRoute>
-                  <Layout>
-                    <Diagnosis />
-                  </Layout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Layout>
-                    <Profile />
-                  </Layout>
-                </PrivateRoute>
-              }
-            />
+            {/* Public routes with Header component */}
+            <Route path="/" element={<Layout><LandingPage /></Layout>} />
+            <Route path="/login" element={<><Login /></>} />
+            <Route path="/register" element={<><Register /></>} />
+            <Route path="/features" element={<Layout><Features /></Layout>} />
+            <Route path="/about" element={<><About /></>} />
+            <Route path="/contact" element={<><Contact /></>} />
+            <Route path="/logout" element={<Logout />} />
+            
+            {/* Protected routes using AuthenticatedApp */}
+            <Route element={<AuthenticatedApp />}>
+              <Route path="/profile-setup" element={<ProfileSetup />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/diagnosis" element={<Diagnosis />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
