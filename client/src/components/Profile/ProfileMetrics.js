@@ -13,10 +13,10 @@ import {
   Divider,
   Chip,
 } from '@mui/material';
-import MedicalServices from '@mui/icons-material/MedicalServices';
+// import MedicalServices from '@mui/icons-material/MedicalServices';
 import AccessTime from '@mui/icons-material/AccessTime';
-import LocalHospital from '@mui/icons-material/LocalHospital';
-import FitnessCenter from '@mui/icons-material/FitnessCenter';
+// import LocalHospital from '@mui/icons-material/LocalHospital';
+// import FitnessCenter from '@mui/icons-material/FitnessCenter';
 import MonitorHeart from '@mui/icons-material/MonitorHeart';
 import Bloodtype from '@mui/icons-material/Bloodtype';
 import Height from '@mui/icons-material/Height';
@@ -65,7 +65,7 @@ const ProfileMetrics = ({ profileData, loading = false }) => {
     { icon: <Bloodtype />, label: 'Blood Type', value: profileData?.bloodType || 'Not specified' },
     { icon: <Height />, label: 'Height', value: formatHeight(profileData?.height) },
     { icon: <Scale />, label: 'Weight', value: formatWeight(profileData?.weight) },
-    // { icon: <MonitorHeart />, label: 'BMI', value: profileData?.bmi ? `${profileData.bmi} ${getBMICategory(profileData.bmi)}` : 'Not calculated' },
+    { icon: <MonitorHeart />, label: 'BMI', value: profileData?.bmi ? `${profileData.bmi} ${getBMICategory(profileData.bmi)}` : 'Not calculated' },
     // { icon: <LocalHospital />, label: 'Blood Pressure', value: profileData?.bloodPressure || 'Not specified' },
     // { icon: <FitnessCenter />, label: 'Heart Rate', value: profileData?.heartRate ? `${profileData.heartRate} bpm` : 'Not specified' },
   ];
