@@ -376,9 +376,18 @@ const Contact = () => {
                   overflow: 'hidden'
                 }}
               >
-                <Typography variant="body2" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                  Map would be displayed here using Google Maps or similar service
-                </Typography>
+                <Box sx={{ width: '100%', height: '100%' }}>
+                  <iframe 
+                    title="Bennett University Location Map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.9591933958527!2d77.58162287528204!3d28.450646475764593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cbf94deb6bc39%3A0x7ba6bedc9a2b537f!2sBennett%20University!5e0!3m2!1sen!2sin!4v1745535562222!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </Box>
               </Paper>
             </Grid>
           </Grid>
