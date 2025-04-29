@@ -24,27 +24,26 @@ const Profile = () => {
         
         // Merge with default data for any missing fields
         setProfileData({
-          firstName: data?.firstName || 'User',
+          firstName: data?.firstName || '',
           lastName: data?.lastName || '',
           email: data?.email || '',
           age: data?.age || '',
           gender: data?.gender || '',
-          bloodType: data?.bloodType || '',
+          bloodGroup: data?.bloodGroup || '',
           height: data?.height || '',
           weight: data?.weight || '',
           bmi: calculateBMI(data?.height, data?.weight),
-          bloodPressure: data?.bloodPressure || '120/80',
-          heartRate: data?.heartRate || 72,
+          bloodPressure: data?.bloodPressure || '',
+          heartRate: data?.heartRate || '',
           allergies: data?.allergies ? data.allergies.split(',').map(item => item.trim()) : [],
           medications: data?.medications ? data.medications.split(',').map(item => item.trim()) : [],
           conditions: data?.medicalConditions ? data.medicalConditions.split(',').map(item => item.trim()) : [],
           lastCheckup: data?.lastCheckup || '',
           nextCheckup: data?.nextCheckup || '',
-          emergencyContact: data?.emergencyContact || {
-            name: '',
-            relationship: '',
-            phone: ''
-          }
+          // Use direct emergency contact fields
+          emergencyContactName: data?.emergencyContactName || '',
+          emergencyContactPhone: data?.emergencyContactPhone || '',
+          emergencyContactRelationship: data?.emergencyContactRelationship || ''
         });
       } catch (error) {
         console.error("Error loading profile data:", error);
@@ -87,7 +86,7 @@ const Profile = () => {
         lastName: profileData.lastName,
         age: profileData.age,
         gender: profileData.gender,
-        bloodType: profileData.bloodType,
+        bloodGroup: profileData.bloodGroup,
         height: profileData.height,
         weight: profileData.weight,
         bloodPressure: profileData.bloodPressure,
@@ -97,7 +96,10 @@ const Profile = () => {
         medicalConditions: profileData.conditions.join(', '),
         lastCheckup: profileData.lastCheckup,
         nextCheckup: profileData.nextCheckup,
-        emergencyContact: profileData.emergencyContact
+        // Direct emergency contact fields
+        emergencyContactName: profileData.emergencyContactName,
+        emergencyContactPhone: profileData.emergencyContactPhone,
+        emergencyContactRelationship: profileData.emergencyContactRelationship
       };
       
       await updateProfile(dataToSave);
@@ -155,7 +157,12 @@ const Profile = () => {
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           <ProfileEmergency 
-            emergencyContact={profileData?.emergencyContact} 
+            // Create an emergency contact object for the Emergency tab
+            emergencyContact={{
+              name: profileData?.emergencyContactName || '',
+              phone: profileData?.emergencyContactPhone || '',
+              relationship: profileData?.emergencyContactRelationship || ''
+            }} 
             isEditing={isEditing} 
             onInputChange={handleInputChange}
             loading={loading}

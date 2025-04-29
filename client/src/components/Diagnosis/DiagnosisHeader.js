@@ -11,15 +11,18 @@ const DiagnosisHeader = () => {
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={() => navigate('/')}
-        sx={{ mr: 2 }}
+        sx={{ 
+          mr: 2,
+          color: '#40C4FF'
+        }}
       >
         Back
       </Button>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: 700 }}>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#40C4FF' }}>
         AI Symptom Diagnosis
       </Typography>
     </Box>
   );
 };
 
-export default DiagnosisHeader; 
+export default DiagnosisHeader;

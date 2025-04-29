@@ -18,6 +18,11 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Logout from './pages/Logout';
 import OfflineIndicator from './components/OfflineIndicator';
+import Faq from './pages/Faq';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import DataProtection from './pages/DataProtection';
+import CookiePolicy from './pages/CookiePolicy';
 
 const theme = createTheme({
   palette: {
@@ -217,6 +222,13 @@ function App() {
             <Route path="/about" element={<><About /></>} />
             <Route path="/contact" element={<><Contact /></>} />
             <Route path="/logout" element={<Logout />} />
+            
+            {/* Legal and Information Pages */}
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/data-protection" element={<DataProtection />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
             
             {/* Protected routes using AuthenticatedApp */}
             <Route element={<AuthenticatedApp />}>

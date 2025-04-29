@@ -11,7 +11,10 @@ const ProfileHeader = ({ loading = false }) => {
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={() => navigate('/dashboard')}
-        sx={{ mr: 2 }}
+        sx={{ 
+          mr: 2,
+          color: '#40C4FF'
+        }}
         disabled={loading}
       >
         Back to Dashboard
@@ -19,7 +22,7 @@ const ProfileHeader = ({ loading = false }) => {
       {loading ? (
         <Skeleton variant="text" width={120} height={40} />
       ) : (
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 700 }}>
+        <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#40C4FF' }}>
           My Profile
         </Typography>
       )}

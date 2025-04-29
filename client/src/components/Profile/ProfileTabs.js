@@ -26,6 +26,17 @@ const ProfileTabs = ({ tabValue, onTabChange, children }) => {
           aria-label="profile tabs"
           variant="scrollable"
           scrollButtons="auto"
+          sx={{
+            '& .MuiTab-root': { 
+              color: 'rgba(255, 255, 255, 0.7)',
+              '&.Mui-selected': { 
+                color: '#40C4FF' 
+              }
+            },
+            '& .MuiTabs-indicator': { 
+              backgroundColor: '#40C4FF' 
+            }
+          }}
         >
           <Tab label="Health Metrics" />
           <Tab label="Diagnosis History" />
@@ -37,4 +48,4 @@ const ProfileTabs = ({ tabValue, onTabChange, children }) => {
   );
 };
 
-export { TabPanel, ProfileTabs }; 
+export { TabPanel, ProfileTabs };

@@ -61,8 +61,8 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-        <MedicalServicesIcon sx={{ mr: 2, color: isEmergency ? 'error.main' : 'primary.main' }} />
-        <Typography variant="h5" component="h2" color={isEmergency ? 'error.main' : 'inherit'}>
+        <MedicalServicesIcon sx={{ mr: 2, color: isEmergency ? 'error.main' : '#40C4FF' }} />
+        <Typography variant="h5" component="h2" color={isEmergency ? 'error.main' : '#40C4FF'}>
           Diagnosis Results
         </Typography>
       </Box>
@@ -100,15 +100,18 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       {diagnosis.assessment && (
         <Card variant="outlined" sx={{ mb: 4 }}>
           <CardContent>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', color: '#40C4FF' }}>
               Assessment
               {diagnosis.confidence > 0 && (
                 <Chip
                   label={`${diagnosis.confidence}% Confidence`}
-                  color="primary"
+                  sx={{ 
+                    ml: 2,
+                    color: '#40C4FF',
+                    borderColor: '#40C4FF' 
+                  }}
                   variant="outlined"
                   size="small"
-                  sx={{ ml: 2 }}
                 />
               )}
             </Typography>
@@ -123,16 +126,19 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       {/* Condition if available */}
       {diagnosis.condition && diagnosis.condition !== "AI Assessment" && diagnosis.condition !== "POSSIBLE EMERGENCY" && (
         <Box sx={{ mb: 4 }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ color: '#40C4FF' }}>
             Condition: {diagnosis.condition}
           </Typography>
           
           {diagnosis.confidence > 0 && !diagnosis.assessment && (
             <Chip
               label={`${diagnosis.confidence}% Confidence`}
-              color="primary"
+              sx={{ 
+                mb: 2,
+                color: '#40C4FF',
+                borderColor: '#40C4FF' 
+              }}
               variant="outlined"
-              sx={{ mb: 2 }}
             />
           )}
         </Box>
@@ -141,8 +147,11 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       {/* Symptoms */}
       {diagnosis.symptoms && diagnosis.symptoms.length > 0 && (
         <Accordion defaultExpanded sx={{ mb: 2 }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="subtitle1">Identified Symptoms</Typography>
+          <AccordionSummary 
+            expandIcon={<ExpandMoreIcon sx={{ color: '#40C4FF' }} />}
+            sx={{ '&.Mui-expanded': { color: '#40C4FF' } }}
+          >
+            <Typography variant="subtitle1" sx={{ color: '#40C4FF' }}>Identified Symptoms</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <List dense>
@@ -159,8 +168,11 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       {/* Recommendations */}
       {diagnosis.recommendations && diagnosis.recommendations.length > 0 && (
         <Accordion defaultExpanded sx={{ mb: 2 }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="subtitle1">Recommendations</Typography>
+          <AccordionSummary 
+            expandIcon={<ExpandMoreIcon sx={{ color: '#40C4FF' }} />}
+            sx={{ '&.Mui-expanded': { color: '#40C4FF' } }}
+          >
+            <Typography variant="subtitle1" sx={{ color: '#40C4FF' }}>Recommendations</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <List dense>
@@ -180,7 +192,7 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
       {/* Follow-up actions */}
       {!isEmergency && !diagnosis.fallbackMode && !loading && (
         <Box sx={{ mt: 4 }}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle2" gutterBottom sx={{ color: '#40C4FF' }}>
             Further Analysis:
           </Typography>
           <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
@@ -190,6 +202,14 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
                 size="small"
                 onClick={onRequestFollowUp}
                 startIcon={<HelpOutlineIcon />}
+                sx={{ 
+                  color: '#40C4FF',
+                  borderColor: '#40C4FF',
+                  '&:hover': {
+                    borderColor: '#29B6F6',
+                    backgroundColor: 'rgba(64, 196, 255, 0.04)'
+                  }
+                }}
               >
                 Get Follow-up Questions
               </Button>
@@ -201,6 +221,14 @@ const DiagnosisResults = ({ diagnosis, onRequestFollowUp, onAnalyzeCondition, lo
                 variant="outlined"
                 size="small"
                 onClick={() => onAnalyzeCondition(condition)}
+                sx={{ 
+                  color: '#40C4FF',
+                  borderColor: '#40C4FF',
+                  '&:hover': {
+                    borderColor: '#29B6F6',
+                    backgroundColor: 'rgba(64, 196, 255, 0.04)'
+                  }
+                }}
               >
                 Analyze "{condition}"
               </Button>

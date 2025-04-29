@@ -8,10 +8,10 @@ const DashboardHeader = () => {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', py: 1 }}>
-      <IconButton onClick={() => navigate('/')} size="small">
+      <IconButton onClick={() => navigate('/')} size="small" sx={{ color: '#40C4FF' }}>
         <ArrowBackIcon />
       </IconButton>
-      <Typography variant="h5" component="h1" sx={{ ml: 1 }}>
+      <Typography variant="h5" component="h1" sx={{ ml: 1, color: '#40C4FF' }}>
         Dashboard
       </Typography>
     </Box>

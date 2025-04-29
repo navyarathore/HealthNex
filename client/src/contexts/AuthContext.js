@@ -59,7 +59,7 @@ export function AuthProvider({ children }) {
       email,
       age: '28',
       gender: 'male',
-      bloodType: 'O+',
+      bloodGroup: 'O+',
       height: '175',
       weight: '70',
       bloodPressure: '120/80',
@@ -70,11 +70,10 @@ export function AuthProvider({ children }) {
       lastCheckup: '2025-03-15',
       nextCheckup: '2025-09-15',
       createdAt: new Date().toISOString(),
-      emergencyContact: {
-        name: 'Emergency Contact',
-        relationship: 'Family',
-        phone: '123-456-7890'
-      }
+      // Emergency contact fields - ensure these match the field names expected by the ProfileEmergency component
+      emergencyContactName: 'Jane Doe',
+      emergencyContactRelationship: 'spouse',
+      emergencyContactPhone: '555-123-4567'
     });
     
     // Set mock token

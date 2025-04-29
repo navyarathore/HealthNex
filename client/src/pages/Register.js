@@ -300,10 +300,10 @@ const Register = () => {
                         borderColor: 'rgba(255, 255, 255, 0.08)',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'rgba(64, 196, 255, 0.15)',
+                        borderColor: 'rgba(0, 255, 200, 0.15)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: '#40C4FF',
+                        borderColor: '#00FFC8',
                       },
                     },
                     '& .MuiInputLabel-root': {
@@ -331,10 +331,10 @@ const Register = () => {
                         borderColor: 'rgba(255, 255, 255, 0.08)',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'rgba(64, 196, 255, 0.15)',
+                        borderColor: 'rgba(0, 255, 200, 0.15)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: '#40C4FF',
+                        borderColor: '#00FFC8',
                       },
                     },
                     '& .MuiInputLabel-root': {
@@ -362,10 +362,10 @@ const Register = () => {
                         borderColor: 'rgba(255, 255, 255, 0.08)',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'rgba(64, 196, 255, 0.15)',
+                        borderColor: 'rgba(0, 255, 200, 0.15)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: '#40C4FF',
+                        borderColor: '#00FFC8',
                       },
                     },
                     '& .MuiInputLabel-root': {
@@ -393,10 +393,10 @@ const Register = () => {
                         borderColor: 'rgba(255, 255, 255, 0.08)',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'rgba(64, 196, 255, 0.15)',
+                        borderColor: 'rgba(0, 255, 200, 0.15)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: '#40C4FF',
+                        borderColor: '#00FFC8',
                       },
                     },
                     '& .MuiInputLabel-root': {
@@ -414,12 +414,12 @@ const Register = () => {
                   disabled={loading}
                   sx={{
                     mb: 2,
-                    backgroundColor: '#40C4FF',
+                    backgroundColor: '#00FFC8',
                     color: '#121212',
-                    boxShadow: '0 4px 14px rgba(64, 196, 255, 0.2)',
+                    boxShadow: '0 4px 14px rgba(0, 255, 200, 0.2)',
                     '&:hover': {
-                      backgroundColor: '#33B8FF',
-                      boxShadow: '0 6px 20px rgba(64, 196, 255, 0.3)',
+                      backgroundColor: '#00E6B5',
+                      boxShadow: '0 6px 20px rgba(0, 255, 200, 0.3)',
                     }
                   }}
                 >
@@ -431,9 +431,9 @@ const Register = () => {
                     variant="body2"
                     onClick={() => navigate('/login')}
                     sx={{ 
-                      color: '#40C4FF',
+                      color: '#00FFC8',
                       '&:hover': {
-                        color: '#33B8FF'
+                        color: '#00E6B5'
                       }
                     }}
                   >

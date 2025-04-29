@@ -140,7 +140,7 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
           gap: 3,
         }}
       >
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom sx={{ color: '#40C4FF' }}>
           Describe Your Symptoms
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
@@ -187,9 +187,6 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography id="severity-slider" gutterBottom>
-              Severity: {currentSymptom.severity}/10
-            </Typography>
             <Slider
               value={currentSymptom.severity}
               onChange={handleSeverityChange}
@@ -199,6 +196,14 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
               marks
               min={1}
               max={10}
+              sx={{
+                color: '#40C4FF',
+                '& .MuiSlider-thumb': {
+                  '&:hover, &.Mui-focusVisible': {
+                    boxShadow: '0px 0px 0px 8px rgba(64, 196, 255, 0.16)'
+                  }
+                }
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -206,6 +211,14 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
               variant="outlined"
               startIcon={<AddCircleOutlineIcon />}
               onClick={handleAddSymptom}
+              sx={{
+                color: '#40C4FF',
+                borderColor: '#40C4FF',
+                '&:hover': {
+                  borderColor: '#29B6F6',
+                  backgroundColor: 'rgba(64, 196, 255, 0.04)'
+                }
+              }}
             >
               Add Symptom
             </Button>
@@ -242,7 +255,10 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
         <Button 
           variant="text" 
           onClick={() => setShowPatientInfo(!showPatientInfo)}
-          sx={{ alignSelf: 'flex-start' }}
+          sx={{ 
+            alignSelf: 'flex-start',
+            color: '#40C4FF'
+          }}
         >
           {showPatientInfo ? 'Hide' : 'Show'} Additional Patient Information (Recommended)
         </Button>
@@ -346,7 +362,18 @@ const DiagnosisForm = ({ onSubmit, isLoading, apiAvailable = true }) => {
           size="large"
           disabled={isLoading}
           startIcon={isLoading ? <CircularProgress size={20} /> : <PsychologyIcon />}
-          sx={{ alignSelf: 'flex-start', mt: 2 }}
+          sx={{ 
+            alignSelf: 'flex-start', 
+            mt: 2,
+            backgroundColor: '#40C4FF',
+            color: '#121212',
+            '&:hover': {
+              backgroundColor: '#29B6F6'
+            },
+            '&.Mui-disabled': {
+              backgroundColor: 'rgba(64, 196, 255, 0.3)'
+            }
+          }}
         >
           {isLoading ? 'Analyzing...' : 'Get Diagnosis'}
         </Button>

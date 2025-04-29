@@ -35,13 +35,6 @@ function Footer() {
     window.scrollTo(0, 0);
   };
 
-  // Function to handle navigation to pages that don't exist yet
-  // This will redirect to PageNotFound component
-  const handleFutureFeature = (path) => {
-    navigate(path);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <Box
       component="footer"
@@ -218,7 +211,7 @@ function Footer() {
                   color="text.secondary" 
                   variant="body2" 
                   underline="hover"
-                  onClick={() => handleFutureFeature('/faq')}
+                  onClick={() => handleNavigation('/faq')}
                 >
                   FAQs
                 </Link>
@@ -236,7 +229,7 @@ function Footer() {
                   color="text.secondary" 
                   variant="body2" 
                   underline="hover"
-                  onClick={() => handleFutureFeature('/privacy-policy')}
+                  onClick={() => handleNavigation('/privacy-policy')}
                 >
                   Privacy Policy
                 </Link>
@@ -247,7 +240,7 @@ function Footer() {
                   color="text.secondary" 
                   variant="body2" 
                   underline="hover"
-                  onClick={() => handleFutureFeature('/terms-of-service')}
+                  onClick={() => handleNavigation('/terms-of-service')}
                 >
                   Terms of Service
                 </Link>
@@ -258,7 +251,7 @@ function Footer() {
                   color="text.secondary" 
                   variant="body2" 
                   underline="hover"
-                  onClick={() => handleFutureFeature('/data-protection')}
+                  onClick={() => handleNavigation('/data-protection')}
                 >
                   Data Protection
                 </Link>
@@ -269,7 +262,7 @@ function Footer() {
                   color="text.secondary" 
                   variant="body2" 
                   underline="hover"
-                  onClick={() => handleFutureFeature('/cookie-policy')}
+                  onClick={() => handleNavigation('/cookie-policy')}
                 >
                   Cookie Policy
                 </Link>

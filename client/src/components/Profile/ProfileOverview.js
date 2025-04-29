@@ -28,8 +28,9 @@ const ProfileOverview = ({
     if (!profileData) return 0;
     
     const fields = [
-      'firstName', 'lastName', 'age', 'gender', 'bloodType', 
-      'height', 'weight', 'bloodPressure', 'heartRate'
+      'firstName', 'lastName', 'age', 'gender', 'bloodGroup', 
+      'height', 'weight', 'bloodPressure', 'heartRate',
+      'emergencyContactName', 'emergencyContactPhone', 'emergencyContactRelationship'
     ];
     
     const filledFields = fields.filter(field => !!profileData[field]).length;
@@ -59,9 +60,10 @@ const ProfileOverview = ({
         mb: 4,
       }}
     >
+      {/* Personal information section */}
       <Grid container spacing={4}>
         <Grid item xs={12} md={4}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', width: '100%' }}>
             {loading ? (
               <Skeleton variant="circular" width={120} height={120} sx={{ mb: 2 }} />
             ) : (
@@ -80,7 +82,7 @@ const ProfileOverview = ({
             {loading ? (
               <Skeleton variant="text" width={150} height={30} />
             ) : (
-              <Typography variant="h5" gutterBottom>
+              <Typography variant="h5" gutterBottom align="center">
                 {fullName}
               </Typography>
             )}
@@ -88,12 +90,12 @@ const ProfileOverview = ({
             {loading ? (
               <Skeleton variant="text" width={120} height={20} />
             ) : (
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" align="center">
                 Member since {new Date().getFullYear()}
               </Typography>
             )}
             
-            <Box sx={{ mt: 2, width: '100%' }}>
+            {/* <Box sx={{ mt: 2, width: '100%' }}>
               <Typography variant="subtitle2" gutterBottom>
                 Profile Completeness
               </Typography>
@@ -119,7 +121,7 @@ const ProfileOverview = ({
                   </Typography>
                 </>
               )}
-            </Box>
+            </Box> */}
           </Box>
         </Grid>
         <Grid item xs={12} md={8}>
@@ -224,13 +226,13 @@ const ProfileOverview = ({
               ) : (
                 <TextField
                   select
-                  label="Blood Type"
-                  value={profileData?.bloodType || ''}
-                  onChange={onInputChange('bloodType')}
+                  label="Blood Group"
+                  value={profileData?.bloodGroup || ''}
+                  onChange={onInputChange('bloodGroup')}
                   fullWidth
                   disabled={!isEditing || loading}
                 >
-                  <MenuItem value="">Select Blood Type</MenuItem>
+                  <MenuItem value="">Select Blood Group</MenuItem>
                   <MenuItem value="A+">A+</MenuItem>
                   <MenuItem value="A-">A-</MenuItem>
                   <MenuItem value="B+">B+</MenuItem>
@@ -239,6 +241,7 @@ const ProfileOverview = ({
                   <MenuItem value="AB-">AB-</MenuItem>
                   <MenuItem value="O+">O+</MenuItem>
                   <MenuItem value="O-">O-</MenuItem>
+                  <MenuItem value="unknown">Unknown</MenuItem>
                 </TextField>
               )}
             </Grid>

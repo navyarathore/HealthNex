@@ -29,7 +29,7 @@ const HealthGoals = () => {
 
   return (
     <Paper elevation={0} sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}>
-      <Typography variant="h6" sx={{ mb: 2 }}>Health Goals</Typography>
+      <Typography variant="h6" sx={{ mb: 2, color: '#40C4FF' }}>Health Goals</Typography>
       
       <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
         {completedCount} of {goals.length} completed
@@ -46,7 +46,14 @@ const HealthGoals = () => {
               edge="start"
               checked={goal.completed}
               size="small"
-              sx={{ ml: -0.5, mr: 0.5 }}
+              sx={{ 
+                ml: -0.5, 
+                mr: 0.5,
+                color: '#40C4FF',
+                '&.Mui-checked': {
+                  color: '#40C4FF',
+                }
+              }}
             />
             <ListItemText 
               primary={goal.text}

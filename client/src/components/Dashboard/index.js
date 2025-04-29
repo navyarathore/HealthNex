@@ -38,7 +38,7 @@ const Dashboard = () => {
       <DashboardHeader />
       
       <Box sx={{ my: 3 }}>
-        <Typography variant="h5" color="text.secondary">
+        <Typography variant="h5" sx={{ color: '#40C4FF' }}>
           {greeting}, {firstName}!
         </Typography>
         <Divider sx={{ my: 2 }} />
